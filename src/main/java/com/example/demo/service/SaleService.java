@@ -138,8 +138,9 @@ public class SaleService {
                 saleByCustomerModel.setCustomerName(customer.getName());
                 saleByCustomerModel.setSalesAmount(allSalesCount);
                 Collections.sort(saleByProductModels, Comparator.comparingDouble(SaleByProductModel::getSalesAmount).reversed());
-                saleByCustomerModel.setSaleItems(saleByProductModels.stream().limit(maxItem).collect(Collectors.toList()));
-
+                if(saleByProductModels.get(0).getSalesCount() > 0) {
+                    saleByCustomerModel.setSaleItems(saleByProductModels.stream().limit(maxItem).collect(Collectors.toList()));
+                }
                 saleByCustomerModels.add(saleByCustomerModel);
             }
 
